@@ -93,15 +93,10 @@ tr.paid { background:#d1fae5; }
                         <div class="value" id="paidCount">0</div>
                         <div class="subtitle" id="paidValue">R$ 0,00</div>
                     </div>
-                    <div class="stat-card red">
+                    <div class="stat-card blue">
                         <h3>Parcelas Pendentes</h3>
                         <div class="value" id="pendingCount">0</div>
                         <div class="subtitle" id="pendingValue">R$ 0,00</div>
-                    </div>
-                    <div class="stat-card blue">
-                        <h3>Total do Financiamento</h3>
-                        <div class="value" id="totalValue">R$ 0,00</div>
-                        <div class="subtitle">Valor completo</div>
                     </div>
                     <div class="stat-card" id="debtCard" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
                         <h3>Dívida Restante</h3>
@@ -245,7 +240,7 @@ function formatDate(dateStr){ if(!dateStr) return '-'; const parts=dateStr.split
 function updateDashboard(){
     let paidCount=0, pendingCount=0, paidValue=0, pendingValue=0;
     installments.forEach(inst=>{ if(inst.paid){ paidCount++; paidValue+=inst.value; }else{ pendingCount++; pendingValue+=inst.value; }});
-    const totalValue=paidValue+pendingValue;
+    
     const progress=installments.length>0?(paidCount/installments.length*100).toFixed(1):0;
 
     document.getElementById('vehicleTitle').textContent=vehicleName;
@@ -253,7 +248,6 @@ function updateDashboard(){
     document.getElementById('paidValue').textContent=formatCurrency(paidValue);
     document.getElementById('pendingCount').textContent=pendingCount;
     document.getElementById('pendingValue').textContent=formatCurrency(pendingValue);
-    document.getElementById('totalValue').textContent=formatCurrency(totalValue);
     document.getElementById('progressPercent').textContent=progress+'%';
     document.getElementById('progressFill').style.width=progress+'%';
 
@@ -300,4 +294,5 @@ window.onload=loadData;
 </script>
 </body>
 </html>
+
 
